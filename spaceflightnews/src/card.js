@@ -1,10 +1,13 @@
+function GetCar({title, imgSrc, summary, url}) {
 
-function GetCar({title, imgSrc, summary}) {
-console.log('hello')
+  function handleClick(){
+      window.location.replace(url);
+  }
+
     return (
       <div>
         <h3>{title}</h3>
-        <img src={imgSrc} />
+        <img src={imgSrc} onClick={handleClick}/>
         <p>{summary}</p>
       </div>
 
