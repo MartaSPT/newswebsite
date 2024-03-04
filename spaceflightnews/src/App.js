@@ -28,6 +28,14 @@ function App() {
       setUrl(resp.previous);
     }
   }
+
+  const handleNewest = event =>{
+    setQuery('?ordering="published_at"');
+  }
+
+  const handleOldest = event =>{
+    setQuery('?ordering="published_at"');
+  }
   
 
 React.useEffect(() => {
@@ -50,8 +58,11 @@ React.useEffect(() => {
         <input type="text" placeholder="search" value={searchTerm}
           onChange={handleChange} />
 
-        <a href="#" id="previous" onClick={handlePrevious} class="previous round">&#8249;</a>
-        <a href="#" id="next" onClick={handleNext} class="next round">&#8250;</a>
+        <a href="#" id="previous" onClick={handlePrevious} className="previous round">&#8249;</a>
+        <a href="#" id="next" onClick={handleNext} className="next round">&#8250;</a>
+
+        <button id="newest" onClick={handleNewest}>Newest</button>
+        <button id="oldest" onClick={handleOldest}>Oldest</button>
         
         {news
           .map((element) => (
