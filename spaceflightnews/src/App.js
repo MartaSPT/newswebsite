@@ -12,6 +12,11 @@ function App() {
   const [news, setNews] = React.useState([]);
   const [resp, setResp] = React.useState();
   const [url, setUrl] = React.useState("https://api.spaceflightnewsapi.net/v4/articles/");
+  const [theme, setTheme] = React.useState("light");
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  }
 
   React.useEffect(() => {
     Axios.get(`${url}${query}`)
@@ -23,28 +28,36 @@ function App() {
 
   return (
     <div className="App">
+      <div class="form-check">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={toggleTheme}/>
+          <label class="form-check-label" for="flexSwitchCheckDefault">Dark Theme</label>
+        </div>
       <header className="App-header">
         <h1>Space Party</h1>
       </header>
 
-      <main>
+      <main
+        style={{
+          backgroundColor: theme === "light" ? "white" : "#282c34"
+        }}
+      >
        <SearchBar
-       searchTerm={searchTerm}
-       setSearchTerm={setSearchTerm}
-       setQuery={setQuery}
-       /> 
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          setQuery={setQuery}
+        />
 
-       <Pagination
-       resp={resp}
-       url={url}
-       setUrl={setUrl}
-       />
+        <Pagination
+          resp={resp}
+          url={url}
+          setUrl={setUrl}
+        />
 
-       <Ordering
-       setQuery={setQuery}
-       />
+        <Ordering
+          setQuery={setQuery}
+        />
 
-       <div id="newslist">
+        <div id="newslist">
           {news
             .map((element) => (
               <Card
