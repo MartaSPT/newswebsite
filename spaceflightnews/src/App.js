@@ -2,6 +2,9 @@ import './App.css';
 import Card from './Card';
 import Axios from "axios"
 import React from 'react';
+import SearchBar from './Navigation/Search';
+import Pagination from './Navigation/Pagination';
+import Ordering from './Navigation/Ordering';
 
 function App() {
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -10,43 +13,13 @@ function App() {
   const [resp, setResp] = React.useState();
   const [url, setUrl] = React.useState("https://api.spaceflightnewsapi.net/v4/articles/");
 
-  const handleChange = event => {
-    setSearchTerm(event.target.value);
-    setQuery(`?search=${searchTerm}`)
-  };
-
-  const handleNext = function (){
-    if(resp.next===null){
-      setUrl(url);
-    } else{
-      setUrl(resp.next);
-    }  }
-  const handlePrevious = function(){
-    if(resp.previous===null){
-      setUrl(url);
-    } else{
-      setUrl(resp.previous);
-    }
-  }
-
-  const handleNewest = event =>{
-    setQuery('?ordering="published_at"');
-  }
-
-  const handleOldest = event =>{
-    setQuery('?ordering="published_at"');
-  }
-  
-
-React.useEffect(() => {
+  React.useEffect(() => {
     Axios.get(`${url}${query}`)
       .then((r) => {
         setResp(r.data);
         setNews(r.data.results);
       })
-  }, [url,query]);
-
-
+  }, [url, query]);
 
   return (
     <div className="App">
@@ -55,26 +28,35 @@ React.useEffect(() => {
       </header>
 
       <main>
-        <input type="text" placeholder="search" value={searchTerm}
-          onChange={handleChange} />
+       <SearchBar
+       searchTerm={searchTerm}
+       setSearchTerm={setSearchTerm}
+       setQuery={setQuery}
+       /> 
 
-        <a href="#" id="previous" onClick={handlePrevious} className="previous round">&#8249;</a>
-        <a href="#" id="next" onClick={handleNext} className="next round">&#8250;</a>
+       <Pagination
+       resp={resp}
+       url={url}
+       setUrl={setUrl}
+       />
 
-        <button id="newest" onClick={handleNewest}>Newest</button>
-        <button id="oldest" onClick={handleOldest}>Oldest</button>
-        
-        {news
-          .map((element) => (
-            <Card
-              key={element.id}
-              title={element.title}
-              imgSrc={element.image_url}
-              summary={element.summary}
-              url={element.url}
-            />
-          ))
-        }
+       <Ordering
+       setQuery={setQuery}
+       />
+
+       <div id="newslist">
+          {news
+            .map((element) => (
+              <Card
+                key={element.id}
+                title={element.title}
+                imgSrc={element.image_url}
+                summary={element.summary}
+                url={element.url}
+              />
+            ))
+          }
+        </div>
       </main>
       <footer>
         by Marta Trincão

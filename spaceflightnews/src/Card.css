@@ -1,0 +1,25 @@
+article {
+    background-color: #eee;
+    border-radius: 8px;
+    padding: 20px;
+    border: solid;
+  }
+  
+img{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    
+  }
+  
+  /* Add some padding inside the card container */
+  .container h3{
+    color:#0081d1;
+    font-size: 20px;
+}
+
+.container p{
+    margin-top: 5px;
+    font-size:14px;
+}

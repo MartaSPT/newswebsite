@@ -1,3 +1,5 @@
+import './Card.css'
+
 function Card({title, imgSrc, summary, url}) {
 
   function handleClick(){
@@ -5,10 +7,12 @@ function Card({title, imgSrc, summary, url}) {
   }
 
     return (
-      <article>
-        <h3>{title}</h3>
+      <article class="Card">
         <img src={imgSrc} alt={imgSrc} onClick={handleClick}/>
-        <p>{summary}</p>
+        <div class="container">
+          <h3>{title}</h3>
+          <p>{summary}</p>
+        </div>
       </article>
 
       );

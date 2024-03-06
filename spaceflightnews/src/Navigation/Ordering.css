@@ -1,0 +1,7 @@
+.dropdown{
+  margin: 0px auto;
+  padding-top: 50px;
+  width: 85%;
+  display: flex;
+  justify-content: right;
+}
