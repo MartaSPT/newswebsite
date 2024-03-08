@@ -7,9 +7,9 @@ function Card({title, imgSrc, summary, url}) {
   }
 
     return (
-      <article class="Card">
+      <article className="Card">
         <img src={imgSrc} alt={imgSrc} onClick={handleClick}/>
-        <div class="container">
+        <div className="container">
           <h3>{title}</h3>
           <p>{summary}</p>
         </div>

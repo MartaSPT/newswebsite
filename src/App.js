@@ -1,6 +1,6 @@
 import './App.css';
 import Card from './Card';
-import Axios from "axios"
+//import Axios from "axios"
 import React from 'react';
 import SearchBar from './Navigation/Search';
 import Pagination from './Navigation/Pagination';
@@ -13,25 +13,36 @@ function App() {
   const [resp, setResp] = React.useState();
   const [url, setUrl] = React.useState("https://api.spaceflightnewsapi.net/v4/articles/");
   const [theme, setTheme] = React.useState("light");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   }
 
   React.useEffect(() => {
-    Axios.get(`${url}${query}`)
-      .then((r) => {
-        setResp(r.data);
-        setNews(r.data.results);
-      })
+      async function fetchData() {
+      try{  
+        setIsLoading(true);
+        const data = await fetch(`${url}${query}`);
+        const json = await data.json();
+        setResp(json);
+        setNews(json.results);
+      } catch (error) {
+        setError(error);
+      } finally {
+       setIsLoading(false);
+      }
+    }
+    fetchData();
   }, [url, query]);
 
   return (
     <div className="App">
-      <div class="form-check">
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={toggleTheme}/>
-          <label class="form-check-label" for="flexSwitchCheckDefault">Dark Theme</label>
-        </div>
+      <div className="form-check">
+        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={toggleTheme} />
+        <label className="form-check-label" htmlFor="flexRadioDefault1">Dark Theme</label>
+      </div>
       <header className="App-header">
         <h1>Space Party</h1>
       </header>
@@ -41,7 +52,7 @@ function App() {
           backgroundColor: theme === "light" ? "white" : "#282c34"
         }}
       >
-       <SearchBar
+        <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           setQuery={setQuery}
@@ -58,6 +69,8 @@ function App() {
         />
 
         <div id="newslist">
+          {isLoading ? <p>Loading...</p> : null}
+
           {news
             .map((element) => (
               <Card
