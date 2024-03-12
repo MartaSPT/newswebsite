@@ -5,6 +5,7 @@ import SearchBar from './Navigation/Search';
 import Pagination from './Navigation/Pagination';
 import Ordering from './Navigation/Ordering';
 import Navbar from './Navigation/Navbar';
+import imageLoading from './resources/loading_img.png';
 
 function App() {
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -23,7 +24,7 @@ function App() {
       try{  
         setIsLoading(true);
         const data = await fetch(`${url}${query}`);
-        const json = await data.json();
+        const json = await data.json(); //turn into a javascritp object
         setResp(json);
         setNews(json.results);
       } catch (error) {
@@ -70,7 +71,7 @@ function App() {
         />
 
         <div id="newslist">
-          {isLoading ? <img src="./loading_img.png"/>: null}
+          {isLoading ? <img id="loading" src={imageLoading} alt="loading"/>: null}
 
           {news
             .map((element) => (

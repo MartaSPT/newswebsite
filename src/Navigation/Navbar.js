@@ -24,6 +24,8 @@ function Navbar({ setUrl, setQuery, theme, setTheme }) {
         setUrl("https://api.spaceflightnewsapi.net/v4/reports/")
     }
 
+    //TODO: usar o React Router Dom!!!
+    //https://www.youtube.com/watch?v=ehvS1Hp90KU
     return (
         <div id="navbar">
             <nav id="list">
@@ -37,10 +39,7 @@ function Navbar({ setUrl, setQuery, theme, setTheme }) {
                 <label className="form-check-label" htmlFor="flexRadioDefault1">Dark Theme</label>
             </div>
         </div>
-
-
     )
-
 }
 
 export default Navbar;
