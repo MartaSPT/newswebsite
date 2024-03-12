@@ -8,5 +8,7 @@ function SearchBar ({searchTerm, setSearchTerm, setQuery}){
           onChange={handleChange} />
     )
 }
+//TODO:
+/*error page!! */
 
 export default SearchBar;

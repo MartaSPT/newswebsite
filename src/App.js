@@ -1,10 +1,10 @@
 import './App.css';
 import Card from './Card';
-//import Axios from "axios"
 import React from 'react';
 import SearchBar from './Navigation/Search';
 import Pagination from './Navigation/Pagination';
 import Ordering from './Navigation/Ordering';
+import Navbar from './Navigation/Navbar';
 
 function App() {
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -16,9 +16,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  }
+ 
 
   React.useEffect(() => {
       async function fetchData() {
@@ -39,10 +37,13 @@ function App() {
 
   return (
     <div className="App">
-      <div className="form-check">
-        <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={toggleTheme} />
-        <label className="form-check-label" htmlFor="flexRadioDefault1">Dark Theme</label>
-      </div>
+      <Navbar
+      setQuery={setQuery}
+      setUrl={setUrl}
+      theme={theme}
+      setTheme={setTheme}
+      />
+      
       <header className="App-header">
         <h1>Space Party</h1>
       </header>
@@ -69,7 +70,7 @@ function App() {
         />
 
         <div id="newslist">
-          {isLoading ? <p>Loading...</p> : null}
+          {isLoading ? <img src="./loading_img.png"/>: null}
 
           {news
             .map((element) => (

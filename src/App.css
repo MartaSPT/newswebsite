@@ -2,16 +2,7 @@
   text-align: center;
 
 }
-.form-check{
-  background-color: #282c34;
-  color: white;
-  font-family: sans-serif;
-  font-size: 16px;
-  display: flex;
-  justify-content: right;
-  margin: 0px;
-  padding: 20px;
-}
+
 
 .App-header {
   background-color: #282c34;

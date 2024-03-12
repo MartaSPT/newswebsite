@@ -16,4 +16,4 @@ function Ordering({ setQuery }) {
     )
 }
 
-export default Ordering
+export default Ordering;
